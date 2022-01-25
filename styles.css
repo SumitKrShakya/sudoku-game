@@ -10,10 +10,6 @@ body {
     justify-content: space-between;
 }
 
-:root {
-    --tileWidth: 35px;
-}
-
 .header {
     flex: 2;
     text-align: center;
@@ -47,11 +43,13 @@ body {
 }
 
 .card3 {
+    cursor: pointer;
+    line-height: 25px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    height: 20px;
-    width: 25px;
+    /* height: 20px;
+    width: 25px; */
     border-radius: 10px;
     border: solid black;
     text-align: center;
@@ -74,14 +72,17 @@ body {
 
 .easy {
     background-color: cadetblue;
+    cursor: pointer;
 }
 
 .medium {
     background-color: rgb(177, 175, 46);
+    cursor: pointer;
 }
 
 .hard {
     background-color: rgb(187, 91, 26);
+    cursor: pointer;
 }
 
 .left-part {
@@ -152,28 +153,4 @@ body {
 .footer {
     flex: 1;
     background-color: rgb(99, 53, 53);
-}
-
-
-/* -------------------------------------------------------- */
-
-.main {
-    padding: 10px;
-    width: calc(var(--tileWidth) * 10);
-}
-
-.tile {
-    cursor: pointer;
-    float: left;
-    line-height: var(--tileWidth);
-    text-align: center;
-    font-size: calc(var(--tileWidth)/2);
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    width: var(--tileWidth);
-    height: var(--tileWidth);
-    color: red;
-    /* margin: 3px; */
-    background-color: rgba(255, 0, 0, 0.1);
-    border: 1px outset rgba(255, 0, 0, 0.5);
 }
