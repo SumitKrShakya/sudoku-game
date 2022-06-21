@@ -11,14 +11,43 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
     <!-- <div class="container"> -->
-    <div class="header">
+    <div class="bg">
+        <!-- <img src="images/bg.gif" alt=""> -->
+        <div class="white">
+
+        </div>
+    </div>
+    <div class="header neon">
         <h1>SUDOKU ARENA</h1>
     </div>
     <div class="content">
+        <!-- <div class="left-part">
+            <div class="easy card">Easy</div>
+            <div class="medium card">Medium</div>
+            <div class="hard card">Hard</div>
+        </div>
+        <div class="middle-part1">
+            <div class="game"> -->
+        <!-- <div class="sudoku"> -->
+        <!-- <div id="Main" class="main"></div> -->
+        <!-- </div> -->
+        <!-- <div class="number-palet ">
+                    <div onclick="numberClick(1)" class="div1 card3">1</div>
+                    <div onclick="numberClick(2)" class="div2 card3">2</div>
+                    <div onclick="numberClick(3)" class="div3 card3">3</div>
+                    <div onclick="numberClick(4)" class="div4 card3">4</div>
+                    <div onclick="numberClick(5)" class="div5 card3">5</div>
+                    <div onclick="numberClick(6)" class="div6 card3">6</div>
+                    <div onclick="numberClick(7)" class="div7 card3">7</div>
+                    <div onclick="numberClick(8)" class="div8 card3">8</div>
+                    <div onclick="numberClick(9)" class="div9 card3">9</div>
+                </div>
+            </div> -->
         <div class="left-part">
             <div onclick="gamethemeEMH(0)" class="easy card">Easy</div>
             <div onclick="gamethemeEMH(1)" class="medium card">Medium</div>
@@ -42,24 +71,38 @@
                 </div>
             </div>
             <div class="control-panel">
-                <div class="reset card2 " id="reset">Reset</div>
-                <div class="play card2" id="play">Play</div>
-                <div class="submit card2" id="submit">Submit</div>
+                <div class="reset card " id="reset">Reset</div>
+                <div class="play card" id="play">Play</div>
+                <div class="submit card" id="submit">Submit</div>
             </div>
         </div>
 
         <div class="right-part">
-            <div class="timer card4" style="color: blue;">
+            <div class="timer card4">
                 <p><span id="min">00</span>: <span id="sec">00</span></p>
             </div>
+            <div class="rules">
+                <h3>Rules</h3><br><br>
+                <div class="rules-text">
+                    <ol type="I">
+                        <li>No. Should not repeat in selected Column and Row</li>
+                        <li>No. Should not present in selected 3X3 Grid</li>
+                        <li>Sudoku is a game of logic and reasoning, so you shouldn’t have to guess</li>
+                        <li>Learn in Detail <a href="https://www.sudokuonline.io/tips/sudoku-rules" target="_blank" styles="text-decoration : underline">here</a></li>
+                    </ol>
+
+                </div>
+
+            </div>
             <!-- <div class="timer"></div> -->
-            <div class="result card">Result</div>
+            <div id="result" class="result card" style="padding: 1px 5px;width: fit-content;color: rgb(230, 245, 236);background-color: rgb(8, 177, 2);">Result</div>
         </div>
     </div>
     <div class="footer"></div>
     <!-- </div> -->
-    <script src="timer.js"></script>
+
     <script src="logic.js"></script>
+    <script src="timer.js"></script>
 </body>
 
 </html>

@@ -15,6 +15,12 @@ let emht = [{
     }
 ];
 
+window.addEventListener('keydown', (event) => {
+    if (event.key <= 9 && event.key >= 0) {
+        numberClick(event.key);
+    }
+})
+
 var vec2dCheck = [
     [],
     [],
@@ -88,6 +94,8 @@ for (let i = 0; i < 81; i++) {
         }
     }
 }
+
+
 console.log(vec2dCheck);
 
 // Setting game theme when easy, medium, hard is clicked.
@@ -137,6 +145,7 @@ const gamethemeEMH = (temp) => {
 
 // When numpad is clicked.
 const ontileclick = (tilename) => {
+
     console.log(tilename, "clicked");
     const prevSelectedTile = document.getElementById(tileSelected);
     if (themeEMH != -1) {
@@ -180,6 +189,10 @@ const ontileclick = (tilename) => {
 
 
 const numberClick = (num) => {
+    if (!timer) {
+        timer = true;
+        stopwatch();
+    }
     const prevSelectedTile = document.getElementById(tileSelected);
     let tempcloser = true;
     let intForUpdate;
@@ -199,17 +212,39 @@ const numberClick = (num) => {
     }
 
 }
+
 const update2dcvector = (intForUpdate, num) => {
     vec2dCheck[Math.floor(intForUpdate / 9)][intForUpdate % 9] = (num).toString();
     console.log(vec2dCheck);
     var mp = new Map();
     for (let i = 0; i < 81; i++) {
-        if (vec2dCheck[Math.floor(i / 9)][i % 9] != '0') {
+        let curr = document.getElementById("tile" + i)
+        if (curr.classList.contains("wrong")) {
+            curr.classList.remove("wrong")
+        }
+    }
+    for (let i = 0; i < 81; i++) {
+
+        if (vec2dCheck[Math.floor(i / 9)][i % 9] !== '0') {
             let a = vec2dCheck[Math.floor(i / 9)][i % 9] + "row" + Math.floor(i / 9);
-            let b = vec2dCheck[Math.floor(i / 9)][i % 9] + "column" + intForUpdate % 9;
+            let b = vec2dCheck[Math.floor(i / 9)][i % 9] + "column" + i % 9;
             let c = vec2dCheck[Math.floor(i / 9)][i % 9] + "box" + Math.floor(Math.floor(i / 9) / 3) + "-" + Math.floor((i % 9) / 3);
-            if (mp.has(a) || mp.has(a) || mp.has(a)) {
-                console.log("error", vec2dCheck[Math.floor(i / 9)][i % 9]);
+            if (mp.has(a) || mp.has(b) || mp.has(c)) {
+                console.log("error", vec2dCheck[Math.floor(i / 9)][i % 9], a, b, c);
+                let currtile = document.getElementById("tile" + i)
+                currtile.classList.add("wrong")
+                if (mp.has(a)) {
+                    currtile = document.getElementById(mp.get(a))
+                    currtile.classList.add("wrong")
+                }
+                if (mp.has(b)) {
+                    currtile = document.getElementById(mp.get(b))
+                    currtile.classList.add("wrong")
+                }
+                if (mp.has(c)) {
+                    currtile = document.getElementById(mp.get(c))
+                    currtile.classList.add("wrong")
+                }
             }
             mp.set(a, "tile" + i);
             mp.set(b, "tile" + i);
@@ -224,3 +259,88 @@ const duplicatechecker = () => {
 
     }
 }
+
+// new code
+
+let a = 0; // variable for min increment;
+let cnt = 0;
+let sec = document.getElementById("sec");
+let min = document.getElementById("min");
+let play = document.getElementById("play");
+let submit = document.getElementById("submit");
+let reset = document.getElementById("reset");
+let timer = false;
+let result = document.getElementById('result')
+
+
+play.addEventListener('click', () => {
+    if (timer == true) return
+    gamethemeEMH(0);
+    timer = true;
+    stopwatch();
+});
+
+submit.addEventListener('click', () => {
+    // console.log(themeEMH);
+    let ans = true;
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            let n = i * 9 + j
+            if (vec2dCheck[i][j] !== emht[themeEMH].answer[n]) {
+                ans = false;
+                break;
+            }
+        }
+        if (!ans) break;
+    }
+    if (ans === false) {
+        result.innerText = "Result : Loose"
+    } else {
+        result.innerText = "Result : Win"
+    }
+    timer = false;
+});
+
+
+reset.addEventListener('click', () => {
+    timer = false;
+    a = 0;
+    cnt = 0;
+    min.innerHTML = "00";
+    sec.innerHTML = "00";
+    gamethemeEMH(themeEMH);
+    // location.reload();
+});
+
+const stopwatch = () => {
+    if (timer === true) {
+        cnt = cnt + 1;
+
+        if (cnt === 60) {
+            cnt = 0;
+            a = a + 1;
+        }
+        if (a < 10) {
+            min.innerHTML = "0" + a;
+        } else {
+            min.innerHTML = a;
+        }
+        if (cnt < 10) {
+            sec.innerHTML = "0" + cnt;
+        } else {
+            sec.innerHTML = cnt;
+        }
+
+        setTimeout("stopwatch()", 1000);
+    }
+}
+
+// 685 329 174
+// 971 485 326
+// 234 761 859
+// 362 574 981
+// 549 618 732
+// 718 293 465
+// 823 946 517
+// 197 852 643
+// 456 137 298

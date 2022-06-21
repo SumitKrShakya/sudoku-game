@@ -66,6 +66,6 @@
 
 .wrong {
     border-color: red;
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: rgb(255, 199, 199);
     color: red;
 }
